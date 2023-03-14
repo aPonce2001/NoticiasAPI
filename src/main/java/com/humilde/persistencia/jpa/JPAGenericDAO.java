@@ -32,8 +32,8 @@ public class JPAGenericDAO<T, ID> implements GenericDAO<T, ID> {
 		} catch (Exception e) {
 			if (em.getTransaction().isActive())
 				em.getTransaction().rollback();
+			throw new RuntimeException("Error al crear.");
 		}
-
 	}
 
 	@Override
@@ -64,6 +64,7 @@ public class JPAGenericDAO<T, ID> implements GenericDAO<T, ID> {
 		} catch (Exception e) {
 			if (em.getTransaction().isActive())
 				em.getTransaction().rollback();
+			throw new RuntimeException("Error al actualizar.");
 		}
 	}
 
@@ -77,6 +78,7 @@ public class JPAGenericDAO<T, ID> implements GenericDAO<T, ID> {
 		} catch (Exception e) {
 			if (em.getTransaction().isActive())
 				em.getTransaction().rollback();
+			throw new RuntimeException("Error al eliminar.");
 		}
 	}
 
