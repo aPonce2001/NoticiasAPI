@@ -1,25 +1,48 @@
 package com.humilde.modelo;
 
-import java.time.LocalDate;
-
-public class Noticia {
-
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+@Entity
+@Table
+public class Noticia implements Serializable {
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name="title")
+	private String title; 
+	@Column(name = "cuerpo")
 	private String cuerpo;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn
 	private Autor autor;
-	private LocalDate fecha;
+	@Temporal(TemporalType.DATE)
+	private Date fecha;
 
 	public Noticia() {
 
 	}
 
-	public Noticia(int id, String cuerpo, Autor autor, LocalDate fecha) {
+
+	public Noticia(String title, String cuerpo, Autor autor, Date fecha) {
 		super();
-		this.id = id;
+		this.title = title;
 		this.cuerpo = cuerpo;
 		this.autor = autor;
 		this.fecha = fecha;
 	}
+
 
 	public int getId() {
 		return id;
@@ -28,6 +51,15 @@ public class Noticia {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 
 	public String getCuerpo() {
 		return cuerpo;
@@ -45,11 +77,11 @@ public class Noticia {
 		this.autor = autor;
 	}
 
-	public LocalDate getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 

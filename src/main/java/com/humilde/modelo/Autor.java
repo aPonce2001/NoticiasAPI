@@ -1,19 +1,34 @@
 package com.humilde.modelo;
 
-public class Autor {
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Autor")
+public class Autor implements Serializable{
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name="nombre")
 	private String nombre;
+	@Column(name="apellido")
 	private String apellido;
+	@Column(name="correo")
 	private String correo;
 
 	public Autor() {
 
 	}
 
-	public Autor(Integer id, String nombre, String apellido, String correo) {
+	public Autor(String nombre, String apellido, String correo) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.correo = correo;
