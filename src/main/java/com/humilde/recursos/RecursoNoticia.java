@@ -10,6 +10,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+
+import com.humilde.dto.NoticiaDTO;
+import com.humilde.modelo.Autor;
 import com.humilde.modelo.Noticia;
 import com.humilde.persistencia.DAOFactory;
 
@@ -25,8 +28,9 @@ public class RecursoNoticia {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public boolean crearNoticia(Noticia noticia) {
+	public boolean crearNoticia(NoticiaDTO noticiaDTO) {
 		try {
+			Noticia noticia = convertirDTOANoticia(noticiaDTO);
 			DAOFactory.getInstacia().getNoticiaDAO().create(noticia);
 			return true;
 		} catch (Exception e) {
@@ -38,8 +42,9 @@ public class RecursoNoticia {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public boolean actualizarNoticia(Noticia noticia) {
+	public boolean actualizarNoticia(NoticiaDTO noticiaDTO) {
 		try {
+			Noticia noticia = convertirDTOANoticia(noticiaDTO);
 			DAOFactory.getInstacia().getNoticiaDAO().update(noticia);
 			return true;
 		} catch (Exception e) {
@@ -87,4 +92,13 @@ public class RecursoNoticia {
 		return DAOFactory.getInstacia().getNoticiaDAO().getNoticiasByTitleContain(titulo);
 	}
 	
+	private Noticia convertirDTOANoticia(NoticiaDTO noticiaDTO) {
+		Autor autor = DAOFactory.getInstacia().getAutorDAO().getByID(noticiaDTO.getIdAutor());
+		Noticia noticia = new Noticia();
+		noticia.setTitle(noticiaDTO.getTitle());
+		noticia.setCuerpo(noticiaDTO.getCuerpo());
+		noticia.setAutor(autor);
+		noticia.setFecha(noticiaDTO.getFecha());
+		return noticia;
+	}
 }
