@@ -95,6 +95,7 @@ public class RecursoNoticia {
 	private Noticia convertirDTOANoticia(NoticiaDTO noticiaDTO) {
 		Autor autor = DAOFactory.getInstacia().getAutorDAO().getByID(noticiaDTO.getIdAutor());
 		Noticia noticia = new Noticia();
+		noticia.setId(noticiaDTO.getId());
 		noticia.setTitle(noticiaDTO.getTitle());
 		noticia.setCuerpo(noticiaDTO.getCuerpo());
 		noticia.setAutor(autor);
