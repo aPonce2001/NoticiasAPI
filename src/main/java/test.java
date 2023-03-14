@@ -15,13 +15,13 @@ public class test {
 		List <Noticia> list = DAOFactory.getInstacia().getNoticiaDAO().getNoticiasByTitleContain("OCHO");
 		//List <Noticia> list = DAOFactory.getInstacia().getNoticiaDAO().getNoticiasByYear(2022);
 		//List<Noticia> list =  DAOFactory.getInstacia().getNoticiaDAO().getNoticiasByAutorID(2);
-		
+		/*
 		for (Noticia n : list) {
 			System.out.println(n.getTitle() + "\n" + n.getCuerpo() );
 			
 			
 		}
-		
+		*/
 	}
 
 }
