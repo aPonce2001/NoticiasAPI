@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table
 public class Noticia implements Serializable {
@@ -27,6 +29,7 @@ public class Noticia implements Serializable {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn
 	private Autor autor;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC") 
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 
